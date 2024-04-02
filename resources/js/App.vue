@@ -1,7 +1,6 @@
 <template>
-    <h2 class="text-4xl text-blue-500 font-bold">Here is the start of aics Planning app</h2>
-    <navbar></navbar>
-    <view-router></view-router>
+    <router-view></router-view>
+    
 </template>
 
 <script>
@@ -10,6 +9,9 @@
         components : {
             'navbar' : NavBar
         }
+    }
+    function flash(){
+        alert('hello world')
     }
 </script>
 

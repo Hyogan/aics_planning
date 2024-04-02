@@ -7,7 +7,11 @@ export default {
 
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage : {
+        'hero_pattern' : "linear-gradient(100deg, rgba(0, 0, 0, 0.493), rgba(0, 0, 0, 0.993)), url('../../public/images/analyse_decisionnelle.jpg')",
+      }
+    },
   },
   plugins: [],
 }

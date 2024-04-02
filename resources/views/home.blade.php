@@ -1,7 +1,7 @@
 @extends('layouts.app')
     @section('content')
     <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
-        @if (Route::has('login'))
+        {{-- @if (Route::has('login'))
             <nav class="-mx-3 flex flex-1 justify-end">
                 @auth
                     <a
@@ -28,7 +28,9 @@
                     @endif
                 @endauth
             </nav>
-        @endif
+        @endif --}}
     </header>
+    
+    </div>
     @endsection
  
