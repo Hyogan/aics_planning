@@ -11,20 +11,26 @@
                         <h1 class="text-4xl font-semibold">Login </h1>
                     </div>
                     <div class="divide-y divide-gray-200">
-                        <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                        <div v-if="errors">
+                            <div v-for="(error, k) in errors" :key="k" class="bg-red-500 mt-4 text-white rounded font-bold mb-4 shadow-lg py-2 px-4 pr-0">
+                                {{ error }}
+                            </div>
+                        </div>
+                      
+                        <form @submit.prevent="loginUser" class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                             <div class="relative">
                                 <!-- <input autocomplete="off" id="email" name="email" type="text" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Email address" /> -->
-                                <input autocomplete="off" id="username" name="username" type="text" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Email address" />
-                                <label for="username" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Email Address</label>
+                                <input v-model="form.email"autocomplete="off" id="email" name="email" type="email" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Email address" />
+                                <label for="email" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Email Address</label>
                             </div>
                             <div class="relative">
-                                <input autocomplete="off" id="password" name="password" type="password" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Password" />
+                                <input v-model="form.password"autocomplete="off" id="password" name="password" type="password" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Password" />
                                 <label for="password" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Password</label>
                             </div>
                             <div class="relative">
                                 <button class="bg-blue-500 text-white rounded-md px-2 py-1 hover:bg-green-500 transition duration-500">Submit</button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <router-link class="text-green-500 underline rounded-md px-2 py-1" :to="{name : 'signup'}">Signup</router-link>
                 </div>
@@ -33,3 +39,27 @@
     </div>
 
 </template>
+
+<script>
+    import { reactive } from 'vue';
+    import useAuth from '../../composables/Auth';
+    export default {
+        setup() {
+            const form = reactive({
+                'password' : '',
+                'email' : ''
+            })
+            const {errors,login} = useAuth()
+            
+            const loginUser = async()=>{
+                // console.log(form)
+                await login(form);
+            }
+            return {
+                form,
+                errors,
+                loginUser
+            }
+        }
+    }
+</script>

@@ -14,7 +14,7 @@ export default function useUserStorages() {
     });
 
     const saveUser = (userData)=>{
-        console.log(userData);
+        // console.log(userData);
         user.id = userData.id;
         user.name = userData.name;
         user.email = userData.email;

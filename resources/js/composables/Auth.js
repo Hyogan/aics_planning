@@ -48,13 +48,13 @@ export default function useAuth(){
             // Save token to local storage or Vuex store
             localStorage.setItem('token', response.data.token);
 
-            localStorage.setItem('token', response.data.token);
+            // localStorage.setItem('token', response.data.token);
             // Redirect to dashboard or another page
             
             getUser().then(user => {
               store.saveUser(user);
               // console.log(user);
-              // localStorage.setItem('user', JSON.stringify(user));
+              localStorage.setItem('user', JSON.stringify(user));
             })
               router.push({name : 'dashboard'})
             
@@ -62,20 +62,17 @@ export default function useAuth(){
             // router.push({name : 'dashboard'});
         }catch(error){
             if(error.response){
-              if(error.response.status === 422){
-                // for(const key in e.response.data.errors){
-                //   errors.value = e.response.data.errors;
-                // }
+              if(error.response.status === 422 || 401){
                   errors.value = error.response.data;
-                  console.log(errors.value)
+                  // console.log(errors.value)
                   // alert('sir, big problem')
                   // console.log(error.response.data)
               }
               else {
-                console.log('There are other types of errors')
+                /*console.log('There are other types of errors')
                 console.error(error.response.data);
                 console.error(error.response.status);
-                console.error(error.response.headers);
+                console.error(error.response.headers);*/
               }
             }
             else if (error.request) {
@@ -106,15 +103,15 @@ export default function useAuth(){
             if(error.response){
               if(error.response.status === 422){
                   errors.value = error.response.data;
-                  console.log(errors.value)
+                  // console.log(errors.value)
                   // alert('sir, big problem')
                   // console.log(error.response.data)
               }
               else {
-                console.log('There are other types of errors')
+                /*console.log('There are other types of errors')
                 console.error(error.response.data);
                 console.error(error.response.status);
-                console.error(error.response.headers);
+                console.error(error.response.headers);*/
               }
             }
             else if (error.request) {

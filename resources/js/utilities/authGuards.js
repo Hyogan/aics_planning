@@ -20,6 +20,6 @@ import  { useUserStore } from "../stores/user";
 
   export function hasRole(user,role){
     const UserRole = user.role;
-    console.log(user.id)
+    // console.log(user.id)
     return UserRole === role;
   }
